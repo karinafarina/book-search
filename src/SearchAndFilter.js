@@ -19,7 +19,7 @@ class SearchAndFilter extends React.Component {
 
     fetch(url, options)
       .then(results => {
-        console.log(results);
+        console.log('results are: ', results);
         if (!results.ok) {
           throw new Error('Something went wrong, please try again later.');
         }
@@ -29,11 +29,6 @@ class SearchAndFilter extends React.Component {
       .then(data => {
         console.log('results are:', data);
         this.props.handleBookData(data);
-        
-        // this.setState({
-        //   books: data,
-        //   error: null
-        // });
       })
       .catch(err => {
         console.log(err);
