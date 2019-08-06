@@ -12,7 +12,6 @@ class SearchAndFilter extends React.Component {
     const options = {
       method: 'GET',
       headers: {
-        "Authorization": "Bearer AIzaSyBh6F-ZE_Y49xI4HZ6D4KYw0ZkIWaioN24",
         "Content-Type": "application/json"
       }
     };
