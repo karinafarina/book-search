@@ -19,12 +19,13 @@ class App extends React.Component {
   handleSearch = (e) => {
     e.preventDefault();
     
-    console.log(`Search called ${e}`);
+    console.log('Search', e);
     
   }
 
   componentDidMount() {
-    const url =`https://www.googleapis.com/books/v1/volumes?q=henry`;
+    let searchTerm = 
+    const url =`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
     const options = {
       method: 'GET',
       headers: {
@@ -42,7 +43,7 @@ class App extends React.Component {
       })
       .then(results => results.json())
       .then(data => {
-        console.log(`results are: ${data}`);
+        console.log('results are:', data);
         // this.setState({
         //   books: data,
         //   error: null
