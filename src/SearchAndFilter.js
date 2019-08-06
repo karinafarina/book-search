@@ -2,10 +2,52 @@ import React from 'react';
 import './SearchAndFilter.css';
 
 class SearchAndFilter extends React.Component {
+
+  handleSearch = (e) => {
+    e.preventDefault();
+
+    const searchTerm = document.getElementById('search-books').value;
+    console.log(searchTerm);
+    const url = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm;
+    const options = {
+      method: 'GET',
+      headers: {
+        "Authorization": "Bearer AIzaSyBh6F-ZE_Y49xI4HZ6D4KYw0ZkIWaioN24",
+        "Content-Type": "application/json"
+      }
+    };
+
+    fetch(url, options)
+      .then(results => {
+        console.log(results);
+        if (!results.ok) {
+          throw new Error('Something went wrong, please try again later.');
+        }
+        return results;
+      })
+      .then(results => results.json())
+      .then(data => {
+        console.log('results are:', data);
+        this.props.handleBookData(data);
+        
+        // this.setState({
+        //   books: data,
+        //   error: null
+        // });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({
+          error: err.message
+        });
+      });
+  }
+
+  
   render() {    
     return (
       <div className="search">
-        <form className="search-books" onSubmit={e => this.props.handleSearch(e)} >
+        <form className="search-books" onSubmit={e => this.handleSearch(e)} >
           <label htmlFor="search-books">Search:</label>
           <input
             type="text"

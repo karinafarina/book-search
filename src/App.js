@@ -12,56 +12,22 @@ class App extends React.Component {
       // printType: 'All'
     };
   }
+
+  handleBookData(data) {
+    this.setState({
+      books: data
+    })
+  }
   // handleChange = (event) => {
   //   this.setState({ printType: event.target.value })
   // }
-
-  handleSearch = (e) => {
-    e.preventDefault();
-    
-    console.log('Search', e);
-    
-  }
-
-  componentDidMount() {
-    let searchTerm = 
-    const url =`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`;
-    const options = {
-      method: 'GET',
-      headers: {
-        "Authorization": "BearerAIzaSyBh6F-ZE_Y49xI4HZ6D4KYw0ZkIWaioN24",
-        "Content Type": "application/json"
-      }
-    };
-
-    fetch(url, options)
-      .then(results => {
-        if(!results.ok) {
-          throw new Error('Something went wrong, please try again later.');
-        }
-        return results;
-      })
-      .then(results => results.json())
-      .then(data => {
-        console.log('results are:', data);
-        // this.setState({
-        //   books: data,
-        //   error: null
-        // });
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        });
-      });
-  }
 
   render() {
     return (
       <div className="app">
         <Title />
         <SearchAndFilter 
-          handleSearch={this.handleSearch}
+          handleBookData={this.handleBookData}
           handleChange={this.handleChange}/>
         {/* <BookList /> */}
       </div>
