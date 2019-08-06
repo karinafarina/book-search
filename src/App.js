@@ -42,10 +42,11 @@ class App extends React.Component {
       })
       .then(results => results.json())
       .then(data => {
-        this.setState({
-          books: data,
-          error: null
-        });
+        console.log(`results are: ${data}`);
+        // this.setState({
+        //   books: data,
+        //   error: null
+        // });
       })
       .catch(err => {
         this.setState({
