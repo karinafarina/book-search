@@ -9,31 +9,58 @@ class App extends React.Component {
     super(props);
     this.state = {
       books: [],
-      // printType: 'All'
     };
   }
 
-  handleBookData(data) {
+  setBooks = books => {
     this.setState({
-      books: data
+      books
     })
+    console.log(books);
   }
-  // handleChange = (event) => {
-  //   this.setState({ printType: event.target.value })
-  // }
+
+handleSearch = e => {
+  e.preventDefault();
+
+  const searchTerm = document.getElementById('search-books').value;
+  const url = 'https://www.googleapis.com/books/v1/volumes?q=' + searchTerm;
+  const options = {
+    method: 'GET',
+    headers: {
+      "Content-Type": "application/json"
+    }
+  };
+
+  fetch(url, options)
+    .then(results => {
+      if (!results.ok) {
+        throw new Error('Something went wrong, please try again later.');
+      }
+      return results;
+    })
+    .then(results => results.json())
+    .then(data => {
+      this.setBooks(data.items);
+    })
+    .catch(err => {
+      this.setState({
+        error: err.message
+      });
+    });
+  }
 
   render() {
+    const { books } = this.state
     return (
       <div className="app">
         <Title />
-        <SearchAndFilter 
-          handleBookData={this.handleBookData}
-          handleChange={this.handleChange}/>
-        <BookList data={this.state.books}/>
+        <SearchAndFilter handleSearch={this.handleSearch}/>
+        <BookList books={books}/>
       </div>
     );
-  }
-  
+  };
 }
+
+
 
 export default App;

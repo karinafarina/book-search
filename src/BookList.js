@@ -3,12 +3,11 @@ import './BookList.css';
 import Book from './Book';
 
 function BookList(props) {
-  const book = props.data;
-  console.log('data book:', book);
+  const books = props.books;
+  console.log('data book:', books);
   return (
     <div className="book-list">
-      
-      <Book />
+      <Book books={books}/>
     </div>
   );
 }
