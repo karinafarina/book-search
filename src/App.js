@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Title from './Title';
 import SearchAndFilter from './SearchAndFilter';
-// import BookList from './BookList';
+import BookList from './BookList';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +29,7 @@ class App extends React.Component {
         <SearchAndFilter 
           handleBookData={this.handleBookData}
           handleChange={this.handleChange}/>
-        {/* <BookList /> */}
+        <BookList data={this.state.books}/>
       </div>
     );
   }

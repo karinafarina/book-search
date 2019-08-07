@@ -2,7 +2,9 @@ import React from 'react';
 import './SearchAndFilter.css';
 
 class SearchAndFilter extends React.Component {
-
+  state = {
+    error: ""
+  }
   handleSearch = (e) => {
     e.preventDefault();
 
